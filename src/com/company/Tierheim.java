@@ -21,14 +21,18 @@ public class Tierheim {
         futterLessie = berechneFuettereHund(ge);
         System.out.println("Lessie bekommt am Abend " + futterLessie + "kg Futter");
 
-        int weit;
+        //-teste wieweitspazieren
+        System.out.println(wieWeitSparzieren(12, 25, true));
+        double weit;
         double gewicht = 4;
         int letztesMalDauer = 20;
         boolean vertraegtSich = true;
         weit = wieWeitSparzieren(gewicht, letztesMalDauer, vertraegtSich);
         System.out.println("Der Hund wird " + weit + "km spazieren sollen.");
 
-        int[] kZeit = new int[]{10, 15, 26};
+        //Testen Kuschelzeit
+        int[] kZeit = new int[]{10, 26, 30};
+        System.out.println(kuschelBedarf(kZeit));
         boolean kB = kuschelBedarf (kZeit);
         if (kB) {
             System.out.println("Der Hund braucht kuscheln.");
@@ -49,23 +53,31 @@ public class Tierheim {
         // return gewicht / 20;
     }
 
-    public static int wieWeitSparzieren(double gewicht, int letztesMal, boolean vertraegtSich) {
-        int weitSpazieren;
+    public static double wieWeitSparzieren(double gewicht, int letztesMal, boolean vertraegtSich) {
+        double weitSpazieren;
         if ( gewicht < 1 && !vertraegtSich) {
-            weitSpazieren = 2;
-        } else if (gewicht <1 && vertraegtSich) {
-            weitSpazieren = 4;
-        } else if (gewicht > 8 || letztesMal > 24 && vertraegtSich) {
-            weitSpazieren = 8;
+            weitSpazieren = 2.0;
+        } else if (gewicht <1 && vertraegtSich) { //else if (gewicht < 1)
+            weitSpazieren = 4.0;
+        //alternative
+            /*if (gewicht <1){
+                if (vertraegtSich){
+                    return 4.0;
+                }else{
+                    return 2.0;
+                }
+            }*/
+        } else if (gewicht > 15 || letztesMal > 24 && vertraegtSich) {
+            weitSpazieren = 8.0;
         } else {
-            weitSpazieren = 5;
+            weitSpazieren = 5.0;
         }
         return weitSpazieren;
     }
 
     public static boolean kuschelBedarf (int[] kuschelZeit){
         boolean kBedarf;
-        if (kuschelZeit[0] + kuschelZeit[1] + kuschelZeit[2] > 60 || kuschelZeit[2] > 25) {
+        if (kuschelZeit[0] + kuschelZeit[1] + kuschelZeit[2] > 60 || kuschelZeit[1] > 25) {
             kBedarf = false;
         } else if (kuschelZeit[0] < kuschelZeit[1] && kuschelZeit[1] < kuschelZeit[2]) {
             kBedarf = true;
